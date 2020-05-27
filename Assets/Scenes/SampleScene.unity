@@ -12182,6 +12182,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 49541504}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1139832255 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3473453616525033945, guid: d458de00cf946894c99ee7f01560e9d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 4833983902575788068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1139832256
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139832255}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6131824, y: 0.1682576, z: 2.1195679}
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!136 &1139832262
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139832255}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.49267578
+  m_Height: 4.229516
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.534875, z: 0.080574036}
 --- !u!1 &1140795579 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 180a1826c7399f949945ba8a31b15d84,
@@ -22779,11 +22812,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 598842262, guid: d458de00cf946894c99ee7f01560e9d8, type: 3}
       propertyPath: MaxSpeed
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 598842262, guid: d458de00cf946894c99ee7f01560e9d8, type: 3}
       propertyPath: speed_m
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 463719517891310538, guid: d458de00cf946894c99ee7f01560e9d8,
         type: 3}
@@ -22844,6 +22877,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TonyHawk
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833983901109264292, guid: d458de00cf946894c99ee7f01560e9d8,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833983901109264292, guid: d458de00cf946894c99ee7f01560e9d8,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5651134361536476446, guid: d458de00cf946894c99ee7f01560e9d8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d458de00cf946894c99ee7f01560e9d8, type: 3}
