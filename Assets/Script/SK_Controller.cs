@@ -21,6 +21,7 @@ public class SK_Controller : MonoBehaviour
     private float junk_speed = 0.0f;
 
     public float TimeLeft_Push = 10.0f;
+    private float TimeLeft_Push_Junk = 0.0f;
     public float TimeLeft_Stop = 5.0f;
 
     public WheelCollider[] wheelcollider = new WheelCollider[4];
@@ -37,26 +38,26 @@ public class SK_Controller : MonoBehaviour
     void Update()
     {
         AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-
-        //var TurningSpeed = Input.GetAxis("Horizontal");
+        
         var Speed = Input.GetAxis("Vertical");
         var Ollies_X = Input.GetAxis("Jump");
         _animator.SetFloat("Speed", Speed);
-        junk_speed = MaxSpeed;
 
         //------------- Turning Animation -------------//
         var Turning_Speed = Input.GetAxis("Horizontal");
         _animator.SetFloat("Turning_Speed", Turning_Speed);
-        Vector3 movedir = (Vector3.forward * Speed) + (Vector3.right * Turning_Speed);
+        //Vector3 movedir = (Vector3.forward * Speed) + (Vector3.right * Turning_Speed);
 
 
         //------------- Start Run & delay 20 second -------------//
-        if (Input.GetKeyDown(KeyCode.W))
+        if (stateInfo.nameHash == IdleHash)
         {
-            Start_Run();
-            TimeLeft_Push = 10.0f;
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                Start_Run();
+                TimeLeft_Push = 10.0f;
+            }
         }
-        
         TimeLeft_Push -= Time.deltaTime;
         Debug.Log("Timer = " + TimeLeft_Push);
 
@@ -78,34 +79,12 @@ public class SK_Controller : MonoBehaviour
                 TimeLeft_Stop = 5.0f;
             }
         }
-        else if (Speed > -1)
+        else if (Speed > -1 || Input.GetKey(KeyCode.W))
         {
-            skate_tr.Translate(0, 0, junk_speed);
+            RunAnimation();
         }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            skate_tr.Translate(0, 0, 0);
-            TimeLeft_Stop -= Time.deltaTime;
-            if (TimeLeft_Stop < 0)
-            {
-                Debug.Log("Start Stop Animation");
-                _animator.SetTrigger("Stop");
-                TimeLeft_Stop = 5.0f;
-            }
-        }
-
-        //if (Input.GetKey(KeyCode.S) || stateInfo.nameHash == IdleHash)
-        //{
-        //    skate_tr.Translate(0, 0, 0);
-        //    TimeLeft_Stop -= Time.deltaTime;
-        //    if (TimeLeft_Stop < 0)
-        //    {
-        //        _animator.SetTrigger("Stop");
-        //        TimeLeft_Stop = 5.0f;
-        //    }
-        //}
-
+        //skate_tr.Translate(0, 0, MaxSpeed);
 
         //------------- Ollies System -------------//
         if (Input.GetKeyDown(KeyCode.Space))
@@ -123,19 +102,19 @@ public class SK_Controller : MonoBehaviour
         }
 
 
-        CharacterController controller = GetComponent<CharacterController>();
-        if (controller.isGrounded)
-        {
-            moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical"));
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= speed_m;
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                moveDirection.y = jumpspeed;
-            }
-        }
-        moveDirection.y -= gravity * Time.deltaTime;
-        controller.Move(moveDirection * Time.deltaTime);
+        //CharacterController controller = GetComponent<CharacterController>();
+        //if (controller.isGrounded)
+        //{
+        //    moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical"));
+        //    moveDirection = transform.TransformDirection(moveDirection);
+        //    moveDirection *= speed_m;
+        //    if (Input.GetKeyDown(KeyCode.Space))
+        //    {
+        //        moveDirection.y = jumpspeed;
+        //    }
+        //}
+        //moveDirection.y -= gravity * Time.deltaTime;
+        //controller.Move(moveDirection * Time.deltaTime);
 
         transform.Rotate(0, Input.GetAxis("Horizontal"), 0);
 
@@ -163,6 +142,11 @@ public class SK_Controller : MonoBehaviour
             tireMeshes[i].position = pos;
             tireMeshes[i].rotation = quat;
         }
+    }
+
+    void RunAnimation()
+    {
+        skate_tr.Translate(0, 0, MaxSpeed);
     }
 
 }
